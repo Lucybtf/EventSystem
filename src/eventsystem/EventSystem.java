@@ -45,6 +45,11 @@ public class EventSystem {
         System.out.print("Introduzca el dispositivo:\n");
         String input2 = br.readLine();
         
+        long time_start, time_end;
+        time_start = System.currentTimeMillis()/1000;
+        //ReallyHeavyTask(); // llamamos a la tarea
+        time_end = System.currentTimeMillis()/1000;
+        System.out.println("the task has taken "+ ( time_end - time_start ) +" milliseconds");
     }
     
 }
