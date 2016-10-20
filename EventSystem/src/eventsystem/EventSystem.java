@@ -58,6 +58,22 @@ public class EventSystem {
         return (a>b)?a-b:b-a;
     }
     
+     public void process(List<EventSystem> l) {
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                 for(int i = 0 ; i < l.size();i++){
+                     EventSystem off=new EventSystem();
+                     off=l.get(i);
+                     if(off.getEventType().equals("OFF")){
+                         System.out.print("ALARM " + off.getDeviceName()+ "  "+numberSeconds(off.getTime_end(), off.getTime_start()));
+                     }
+                 }
+            }
+        }).start();
+    }
+    
       /**
      * EventOn: Turn On the device.
      * @param type
@@ -92,6 +108,7 @@ public class EventSystem {
                             System.out.print("The device is OFF.\n");
                             e.setEventType(type);
                             e.setTime_start(System.currentTimeMillis()/1000);
+                          
                             l.add(e);
                             return l;
                     }
@@ -175,7 +192,8 @@ public class EventSystem {
                      BufferedReader input2= new BufferedReader(new InputStreamReader(System.in));
                      String dev=input2.readLine();
                      l=e.EventOn("ON", dev, l);
-                     System.out.print("Resultados en memoria:"+ l.toString()+"\n"); 
+                     System.out.print("Resultados en memoria:"+ l.toString()+"\n");
+                     e.process(l);
                     
                 }
                 if(input_typeEvent.equals("OFF")){
@@ -185,7 +203,8 @@ public class EventSystem {
                     BufferedReader input2= new BufferedReader(new InputStreamReader(System.in));
                     String dev=input2.readLine();
                     l=e.EventOff("OFF", dev, l); 
-                    System.out.print("Resultados en memoria:"+ l.toString()+"\n"); 
+                    System.out.print("Resultados en memoria:"+ l.toString()+"\n");
+                    e.process(l);
                 }
                
                 System.out.println("Menu:\n 1. Escriba \"ON\", si desea iniciar un dispositivo.\n 2.Escriba \"OFF\", si desea iniciar un dispositivo.\n Pulse cualquier otra número para salir.\n ");
