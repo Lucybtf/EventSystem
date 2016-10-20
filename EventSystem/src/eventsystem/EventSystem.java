@@ -133,7 +133,6 @@ public class EventSystem {
                     System.out.print("The device is ON\n");
                     e.setTime_end(System.currentTimeMillis()/1000);
                     l.remove(e); //Eliminamos el evento de la lista
-                    //System.out.print("Switch OFF device\n");
                     e.setEventType("OFF"); //Apagamos el evento
                     System.out.print(e.toString()+ "\n");
                     System.out.print(e.numberSeconds(e.getTime_end(), e.getTime_start())+ "seconds");
