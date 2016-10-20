@@ -53,9 +53,10 @@ public class EventSystem {
     public String toString() {
         return "EventSystem{" + "eventType=" + eventType + ", deviceName=" + deviceName + ", time_start=" + time_start + ", time_end=" + time_end + '}';
     }
-   
     
-    
+    public long numberSeconds(long a, long b){
+        return (a>b)?a-b:b-a;
+    }
     
       /**
      * EventOn: Turn On the device.
@@ -75,27 +76,40 @@ public class EventSystem {
                 e.setTime_start(System.currentTimeMillis()/1000);
                 l.add(e);
                 System.out.print("The device is ON and the List was empty\n");
-                System.out.print("Resultados en memoria:"+ l.toString()+"\n");
                 return l;
         }
         else{
             for(int i = 0 ; i < l.size();i++){
-            e=l.get(i);
-            if(e.getDeviceName().equals(device) && e.getEventType().equals(type) && e.time_start!= 0){
-                
-                  System.out.print("The device is ON. No hacemos nada");
-            }
-            else{
-                System.out.print("The device is OFF ¿Que hacemos con los apagados?");
-                e.setTime_start(System.currentTimeMillis()/1000);
-                l.add(e);
-             //   return l;
+           
+                e=l.get(i);
+                System.out.print(e.toString() + "\n");
+                if(e.getDeviceName().equals(device) && e.getEventType().equals(type)){
+                    if(e.getTime_end()== 0 && e.getTime_start()!=0){
+                            System.out.print("The device is ON.\n");
+                           // return l;
+                    }
+                    if(e.getTime_end()!= 0 && e.getTime_start()!=0){
+                            System.out.print("The device is OFF.\n");
+                            e.setEventType(type);
+                            e.setTime_start(System.currentTimeMillis()/1000);
+                            l.add(e);
+                            return l;
+                    }
+                }
+                else{
+                    EventSystem ev = new EventSystem();
+                    ev.setEventType(type);
+                    ev.setDeviceName(device);
+                    ev.setTime_start(System.currentTimeMillis()/1000);
+                    l.add(ev);
+                    return l;
                 }
             }
-           
         }  
+        
         return l;
     }
+        
     
     /**
      * EventOff: Turn Off the device.
@@ -105,10 +119,9 @@ public class EventSystem {
      */
     public List<EventSystem> EventOff(String type, String device, List<EventSystem> l){
         
-        System.out.print("EventOFF\n");
+      //  System.out.print("EventOFF\n");
         EventSystem e= new EventSystem();
-        if(l.isEmpty()){
-                
+        if(l.isEmpty()){ 
             System.out.print("The device not exist\n");
             return l;
         }
@@ -120,14 +133,17 @@ public class EventSystem {
                     System.out.print("The device is ON\n");
                     e.setTime_end(System.currentTimeMillis()/1000);
                     l.remove(e); //Eliminamos el evento de la lista
-                    System.out.print("Switch OFF device\n");
+                    //System.out.print("Switch OFF device\n");
                     e.setEventType("OFF"); //Apagamos el evento
+                    System.out.print(e.toString()+ "\n");
+                    System.out.print(e.numberSeconds(e.getTime_end(), e.getTime_start())+ "seconds");
                     l.add(e); //Lo añadimos a la lista
                     return l;
                 }
                 else{
-                    System.out.print("The device is OFF. No hacemos nada\n");
-                    
+                    System.out.print("The device is OFF.\n");
+                     System.out.print(e.numberSeconds(e.getTime_end(), e.getTime_start())+ "seconds");
+                    return l;
                 }
             }
            
@@ -138,37 +154,26 @@ public class EventSystem {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException{
+    public static void main(String[] args) {
         // TODO code application logic here
         List<EventSystem> l=new ArrayList<EventSystem> ();
         EventSystem e = new EventSystem();
         
-        System.out.println("Menu:\n 1. Inserte un evento.\n 2. Inicie o apage un evento.\n Pulse cualquier otra número para salir.\n ");
-        String input;
-        int choice = 0;
-       // InputStreamReader input = new InputStreamReader(System.in);
-       
-        try {
-        BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
-        input = br.readLine();
-        choice = Integer.parseInt(input);
-        } catch (NumberFormatException ex) {
-           System.out.println("Not a number !");
-        }
+        System.out.println("Menu:\n 1. Escriba \"ON\", si desea iniciar un dispositivo.\n 2.Escriba \"OFF\", si desea iniciar un dispositivo.\n Pulse cualquier otra número para salir.\n ");
         String input_typeEvent;
         System.out.print("Introduzca tipo de evento:\n");
-        BufferedReader input1= new BufferedReader(new InputStreamReader(System.in));
-        input_typeEvent = input1.readLine();
-        
-        while(input_typeEvent.equals("ON") || input_typeEvent.equals("OFF")){
-              //  System.out.print("HOLA ENTRE EN EL BUCLE");
+       
+        try {
+            BufferedReader input1= new BufferedReader(new InputStreamReader(System.in));
+            input_typeEvent = input1.readLine();
+            while(input_typeEvent.equals("ON") || input_typeEvent.equals("OFF")){
+              
                 e.setEventType(input_typeEvent);
                 if(input_typeEvent.equals("ON")){
                     
-                     System.out.print("EVENTO de Encendido de Dispositivo\n");
+                     System.out.print("EVENTO de Encendido de Dispositivo\n\n");
                      System.out.print("Introduzca el dispositivo:\n");
                      BufferedReader input2= new BufferedReader(new InputStreamReader(System.in));
-                     
                      String dev=input2.readLine();
                      l=e.EventOn("ON", dev, l);
                      System.out.print("Resultados en memoria:"+ l.toString()+"\n"); 
@@ -176,27 +181,27 @@ public class EventSystem {
                 }
                 if(input_typeEvent.equals("OFF")){
                     
-                    System.out.print("EVENTO de Apagado de Dispositivo\n");
+                    System.out.print("EVENTO de Apagado de Dispositivo\n\n");
                     System.out.print("Introduzca el dispositivo:\n");
                     BufferedReader input2= new BufferedReader(new InputStreamReader(System.in));
                     String dev=input2.readLine();
                     l=e.EventOff("OFF", dev, l); 
                     System.out.print("Resultados en memoria:"+ l.toString()+"\n"); 
                 }
-                
-                System.out.println("\n\nMenu:\n 1. Inserte un evento.\n 2. Inicie o apage un evento.\n Pulse cualquier otra número para salir.\n\n\n ");
-                try {
-                    BufferedReader br= new BufferedReader(new InputStreamReader(System.in));
-                    input = br.readLine();
-                    choice = Integer.parseInt(input);
-                } catch (NumberFormatException ex) {
-                       System.out.println("Not a number !");
-                }
+               
+                System.out.println("Menu:\n 1. Escriba \"ON\", si desea iniciar un dispositivo.\n 2.Escriba \"OFF\", si desea iniciar un dispositivo.\n Pulse cualquier otra número para salir.\n ");
                 System.out.print("Introduzca tipo de evento:\n");
                 BufferedReader inputend= new BufferedReader(new InputStreamReader(System.in));
                 input_typeEvent = inputend.readLine();
+   
+            }
+             
+            System.out.print("End of the Program");
+            System.exit(0);
+            
+            } catch(IOException ex) {
+           System.out.println(ex.getMessage());
         }
-     
     }
 }
 
