@@ -1,7 +1,7 @@
 # EventSystem
 
 
-1. Guía de Usuario
+## Guía de Usuario
 
 Para el Usuario, descargue el .jar: https://github.com/Lucybtf/EventSystem/blob/master/System.jar
 
@@ -14,7 +14,7 @@ Para el Usuario, descargue el .jar: https://github.com/Lucybtf/EventSystem/blob/
     4. A continuación, le aparecerán el listado de eventos que han sido introducidos por el usuario.
 
 
-2. Guía de Desarrollador
+## Guía de Desarrollador
 
 Para el Desarrollador, descargue el directorio: https://github.com/Lucybtf/EventSystem/tree/master/System/src/eventsystem
 
