@@ -18,7 +18,7 @@ public class EventSystem {
     private String deviceName;
     private long time_start;
     private long time_end;
-   // private static final Logger log = LoggerFactory.getLogger(EventSystem.class);
+  
     
     public String getEventType() {
         return eventType;
