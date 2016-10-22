@@ -4,7 +4,8 @@
 1. Guía de Usuario
 
 Para el Usuario, descargue el .jar: https://github.com/Lucybtf/EventSystem/blob/master/System.jar
-1. Pulse sobre el .jar para ejecutarlo.
+
+1. Pulse sobre el .jar para ejecutarlo\n.
 2. Seleccione el tipo de opción: ON o OFF.
 3. Introduzca el nombre del dispositivo que desea encender o apagar y pulse sobre el botón Enviar.
 4. A continuación, le aparecerán el listado de eventos que han sido introducidos por el usuario.
