@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author lulu
+ * @author Lucía Batista Flores
  */
 public class EventSystem2GUI extends javax.swing.JFrame {
 
@@ -24,17 +24,18 @@ public class EventSystem2GUI extends javax.swing.JFrame {
     public EventSystem2GUI() {
         initComponents();
         
-
-       
-        
     }
 
     void showdata(List<EventSystem> l) {
-       
+        long s;
         DefaultTableModel tableModel = (DefaultTableModel)jTable1.getModel();
+        
         for(int i=0; i< l.size();i++){
             EventSystem event_row = l.get(i);
-            long s= event_row.numberSeconds(event_row.getTime_start(), event_row.getTime_end());
+            if(event_row.getTime_end()!=0)
+                s= event_row.numberSeconds(event_row.getTime_start(), event_row.getTime_end());
+            else
+                s=0;
             Object row[] = {event_row.getEventType(),event_row.getDeviceName(), s};
             tableModel.addRow(row);
         }
@@ -128,46 +129,6 @@ public class EventSystem2GUI extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-   /* public static void main(String args[]) {
-        
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EventSystem2GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EventSystem2GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EventSystem2GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EventSystem2GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                
-                 String col[] = {"Pos","Team","P", "W", "L", "D", "MP", "GF", "GA", "GD"};
-
-                    DefaultTableModel tableModel = new DefaultTableModel(col, 0);
-
-                    JTable table = new JTable(tableModel);
-                   // jTable table = new JTable(model);
-                   Object[] objs = {1, "Arsenal", 35, 11, 2, 2, 15, 30, 11, 19};
-
-                    tableModel.addRow(objs);
-                new EventSystem2GUI().setVisible(true);
-            }
-        });
-    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

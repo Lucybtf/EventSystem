@@ -7,12 +7,8 @@ package eventsystem;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+
 
 /**
  *
@@ -23,7 +19,7 @@ public class EventSystemGUI extends javax.swing.JFrame {
     
     EventSystem e = new EventSystem();
     private static List<EventSystem> list=new ArrayList<EventSystem> ();
-    boolean end=false;
+ //   boolean end=false;
     /**
      * Creates new form EventSystemGUI
      */
@@ -148,14 +144,12 @@ public class EventSystemGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         e.setEventType(ON.getLabel());
         System.out.print("Click ON:"+ON.getLabel()+"\n");
-     //   System.out.print("\n"+ e.toString());
     }//GEN-LAST:event_ONMouseClicked
 
     private void OFFMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OFFMouseClicked
         // TODO add your handling code here:
         e.setEventType(OFF.getLabel());
         System.out.print("Click ON:"+OFF.getLabel()+"\n");
-        //System.out.print("\n"+ e.toString());
     }//GEN-LAST:event_OFFMouseClicked
 
     private void SendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SendActionPerformed
@@ -168,8 +162,7 @@ public class EventSystemGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(TextField1, "No ha introducido el nombre del dispositivo.");
         }
         else{
-                System.out.print("Click Text:"+e.getDeviceName()+"\n");
-       // System.out.print("\n"+ e.toString());  
+                System.out.print("Click Text:"+e.getDeviceName()+"\n");  
                 EventSystem2GUI event2 = new EventSystem2GUI();
                // while(end != true){
                 if(e.getEventType() == "ON"){
@@ -198,7 +191,6 @@ public class EventSystemGUI extends javax.swing.JFrame {
 
     private void ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitActionPerformed
         // TODO add your handling code here:
-       // end=true;
         System.exit(0);
     }//GEN-LAST:event_ExitActionPerformed
 
