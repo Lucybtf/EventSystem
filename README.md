@@ -5,7 +5,7 @@
 
 Para el Usuario, descargue el .jar: https://github.com/Lucybtf/EventSystem/blob/master/System.jar
 
-1. Pulse sobre el .jar para ejecutarlo\n.
+1. Pulse sobre el .jar para ejecutarlo.
 
 2. Seleccione el tipo de opción: ON o OFF.
 
