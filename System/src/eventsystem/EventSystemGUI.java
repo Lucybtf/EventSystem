@@ -12,14 +12,13 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author lulu
+ * @author Lucía Batista Flores
  */
 public class EventSystemGUI extends javax.swing.JFrame {
 
     
     EventSystem e = new EventSystem();
     private static List<EventSystem> list=new ArrayList<EventSystem> ();
- //   boolean end=false;
     /**
      * Creates new form EventSystemGUI
      */
@@ -164,7 +163,7 @@ public class EventSystemGUI extends javax.swing.JFrame {
         else{
                 System.out.print("Click Text:"+e.getDeviceName()+"\n");  
                 EventSystem2GUI event2 = new EventSystem2GUI();
-               // while(end != true){
+               
                 if(e.getEventType() == "ON"){
 
                              list=e.EventOn(e.getEventType(), e.getDeviceName(), list);
@@ -225,17 +224,11 @@ public class EventSystemGUI extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 EventSystemGUI event = new EventSystemGUI();
-                //event.add(e);
-                //event.getContentPane().add(new JPanel());
                 event.setVisible(true);
            
             }
         });
-        //EventSystemGUI 
-       // String input_typeEvent= EventSystemGUI.
-        /* while(input_typeEvent.equals("ON") || input_typeEvent.equals("OFF")){
-         
-         }*/
+       
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
